@@ -27,6 +27,20 @@ public class Customer {
 	
 	@Column(name = "zip")
 	private int zip;
+	
+	public Customer() 
+	{
+			//constructor
+	}
+
+	public Customer(String name, String phonenumber, String address, int zip) 
+	{
+		this.name = name;
+		this.address = address;
+		this.phonenumber = phonenumber;
+		this.zip = zip;
+	}
+	
 
 	public String getPhonenumber() {
 		return phonenumber;
@@ -58,6 +72,12 @@ public class Customer {
 
 	public void setZip(int zip) {
 		this.zip = zip;
+	}
+
+	@Override
+	public String toString() {
+		return "Customer [customerid=" + customerid + ", phonenumber=" + phonenumber + ", name=" + name + ", address="
+				+ address + ", zip=" + zip + "]";
 	}
 
 	

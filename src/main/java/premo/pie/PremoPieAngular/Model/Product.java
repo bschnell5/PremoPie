@@ -22,12 +22,26 @@ public class Product {
 	private String size;
 	
 	@Column(name = "price")
-	private Double price;
+	private double price;
+	
+	
+	public Product() 
+	{
+			//constructor
+	}
+
+	public Product(String description, String size, double price) 
+	{
+		this.description = description;
+		this.size = size;
+		this.price = price;
+	}
+	
 
 	public long getProductid() {
 		return productid;
 	}
-
+	
 	public void setProductid(long productid) {
 		this.productid = productid;
 	}
@@ -54,6 +68,12 @@ public class Product {
 
 	public void setPrice(Double price) {
 		this.price = price;
+	}
+
+	@Override
+	public String toString() {
+		return "Product [productid=" + productid + ", description=" + description + ", size=" + size + ", price="
+				+ price + "]";
 	}
 	
 	

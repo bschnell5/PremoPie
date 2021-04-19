@@ -25,6 +25,18 @@ public class CustomerOrder {
 	
 	@Column(name = "ordertimestamp")
 	private Date ordertimestamp;
+	
+	public CustomerOrder() 
+	{
+			//constructor
+	}
+
+	public CustomerOrder(String itemorder, int total, Date ordertimestamp) 
+	{
+		this.itemorder = itemorder;
+		this.total = total;
+		this.ordertimestamp = ordertimestamp;
+	}
 
 	public long getOrderid() {
 		return orderid;
@@ -56,6 +68,12 @@ public class CustomerOrder {
 
 	public void setOrdertimestamp(Date ordertimestamp) {
 		this.ordertimestamp = ordertimestamp;
+	}
+
+	@Override
+	public String toString() {
+		return "CustomerOrder [orderid=" + orderid + ", itemorder=" + itemorder + ", total=" + total
+				+ ", ordertimestamp=" + ordertimestamp + "]";
 	}
 	
 }

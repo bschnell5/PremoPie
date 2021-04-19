@@ -27,6 +27,19 @@ public class Employee {
 	@Column(name = "active")
 	private boolean active;
 
+	public Employee() 
+	{
+			//constructor
+	}
+
+	public Employee(String name, String address, int tin, boolean active) 
+	{
+		this.name = name;
+		this.address = address;
+		this.tin = tin;
+		this.active = active;
+	}
+
 	public long getEmployeeid() {
 		return employeeid;
 	}
@@ -65,5 +78,11 @@ public class Employee {
 
 	public void setActive(boolean active) {
 		this.active = active;
+	}
+
+	@Override
+	public String toString() {
+		return "Employee [employeeid=" + employeeid + ", name=" + name + ", address=" + address + ", tin=" + tin
+				+ ", active=" + active + "]";
 	}
 }
