@@ -28,20 +28,14 @@ public class CustomerController {
 	    try {
 	      List<Customer> customers = new ArrayList<Customer>();
 
-	 
-
 	      if (name == null)
 	        customerRepository.findAll().forEach(customers::add);
 	      else
 	        customerRepository.findByCustomerName(name).forEach(customers::add);
 
-	 
-
 	      if (customers.isEmpty()) {
 	        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	      }
-
-	 
 
 	      return new ResponseEntity<>(customers, HttpStatus.OK);
 	    } catch (Exception e) {
@@ -50,12 +44,9 @@ public class CustomerController {
 	  }
 
 	 
-
 	  @GetMapping("/customers/{id}")
 	  public ResponseEntity<Customer> getCustomerById(@PathVariable("id") long customerid) {
 	    Optional<Customer> customerData = customerRepository.findById(customerid);
-
-	 
 
 	    if (customerData.isPresent()) {
 	      return new ResponseEntity<>(customerData.get(), HttpStatus.OK);
@@ -65,12 +56,11 @@ public class CustomerController {
 	  }
 
 	 
-
 	  @PostMapping("/customers")
 	  public ResponseEntity<Customer> createCustomer(@RequestBody Customer customer) {
 	    try {
 	      Customer _customer = customerRepository
-	          .save(new Customer(customer.getName(), customer.getAddress(), customer.getTin(), customer.isActive()));
+	          .save(new Customer(customer.getPhonenumber(), customer.getName(), customer.getAddress(), customer.getZip()));
 	      return new ResponseEntity<>(_customer, HttpStatus.CREATED);
 	    } catch (Exception e) {
 	      return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -78,26 +68,21 @@ public class CustomerController {
 	  }
 
 	 
-
 	  @PutMapping("/customers/{id}")
 	  public ResponseEntity<Customer> updateCustomer(@PathVariable("id") long customerid, @RequestBody Customer customer) {
 	    Optional<Customer> customerData = customerRepository.findById(customerid);
-
-	 
 
 	    if (customerData.isPresent()) {
 	      Customer _customer = customerData.get();
 	      _customer.setName(customer.getName());
 	      _customer.setAddress(customer.getAddress());
-	      _customer.setTin(customer.getTin());
-	      _customer.setActive(customer.isActive());
+	      _customer.setZip(customer.getZip());
+	      _customer.setPhonenumber(customer.getPhonenumber());
 	      return new ResponseEntity<>(customerRepository.save(_customer), HttpStatus.OK);
 	    } else {
 	      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	    }
 	  }
-
-	 
 
 	  @DeleteMapping("/customers/{id}")
 	  public ResponseEntity<HttpStatus> deleteCustomer(@PathVariable("id") long customerid) {
@@ -119,19 +104,13 @@ public class CustomerController {
 	    } catch (Exception e) {
 	      return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 	    }
-
-	 
-
 	  }
 
 	 
-
-	  @GetMapping("/customers/active")
-	  public ResponseEntity<List<Customer>> findByPublished() {
+	  @GetMapping("/customers/zip")
+	  public ResponseEntity<List<Customer>> findByZip(int zip) {
 	    try {
-	      List<Customer> customers = customerRepository.findByIsActive(true);
-
-	 
+	      List<Customer> customers = customerRepository.findByZip(zip);
 
 	      if (customers.isEmpty()) {
 	        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
