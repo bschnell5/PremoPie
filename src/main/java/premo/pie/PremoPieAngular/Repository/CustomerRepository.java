@@ -10,9 +10,9 @@ import premo.pie.PremoPieAngular.Model.Customer;
 
 public interface CustomerRepository extends JpaRepository <Customer, Long> 
 {
-	  List<Customer> findByEmployeeId(long employeeid);
+	  List<Customer> findByCustomerId(long customerid);
 	   
-	  List<Customer> findByEmployeeName(String name);
+	  List<Customer> findByCustomerName(String name);
 	  
-	  List<Customer> findByIsActive(Boolean active);
+	  List<Customer> findByZip(int zip);
 }
